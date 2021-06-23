@@ -1,6 +1,25 @@
 let usersDATA = JSON.parse(DATA);
 const userList = document.getElementById("userList");
+const sortTable = document.getElementById("sortTable");
+const nameData = document.getElementById("nameData");
+
 console.log(usersDATA);
+
+nameData.addEventListener("click", (event) => {
+  
+  const tableKey = nameData.dataset.key;
+  
+
+  usersDATA.sort((a, b) => {
+    return a[tableKey].localeCompare(b[tableKey]) * -1;
+  });
+  renderUserTable(createUsersCardHTML(usersDATA), userList);
+
+  //console.log(nameData);
+  console.log(event.target);
+  //console.log(tableHeaders);
+});
+
 //     "id": 1,
 //     "name": "Leanne Graham",
 //     "username": "Bret",
@@ -28,7 +47,7 @@ function createUsersCardHTML(userArray) {
   userArray.forEach((tableElem) => {
     tableHTML += createUserCard(tableElem);
   });
-  console.log(tableHTML);
+  //console.log(tableHTML);
   return tableHTML;
 }
 
