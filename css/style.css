@@ -3,3 +3,13 @@
     width: 100%;
     margin: 0 auto;
 }
+
+[data-sorting]{
+    cursor: pointer;
+}
+[data-sorting="true"][data-order="1"]::after{
+    content: '\25B2';
+}
+[data-sorting="true"][data-order="-1"]::after{
+    content: '\25BC';
+}

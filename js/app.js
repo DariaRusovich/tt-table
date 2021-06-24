@@ -1,19 +1,34 @@
 let usersDATA = JSON.parse(DATA);
 const userList = document.getElementById("userList");
 const sortTable = document.getElementById("sortTable");
-const nameData = document.getElementById("nameData");
-
+const tableHeads = Array.from(sortTable.children)
+// console.log(tableHeads);
+usersDATA.sort((a, b) => {
+  return a.name.localeCompare(b.name);
+});
 console.log(usersDATA);
 
-nameData.addEventListener("click", (event) => {
-  
-  const tableKey = nameData.dataset.key;
-  
 
-  usersDATA.sort((a, b) => {
-    return a[tableKey].localeCompare(b[tableKey]) * -1;
-  });
-  renderUserTable(createUsersCardHTML(usersDATA), userList);
+
+sortTable.addEventListener("click", (event) => {
+  const currentTh = event.target.closest('th')
+  if (currentTh) {
+    tableHeads.forEach(th => {
+      if (th !== currentTh) {
+        th.dataset.sorting = 'false'
+      } else{
+        th.dataset.sorting = 'true'
+      }
+    })
+    currentTh.dataset.order *= -1
+    const {key, order} = currentTh.dataset;
+    usersDATA.sort((a, b) => {
+      return a[key].localeCompare(b[key]) * order;
+    });
+    renderUserTable(createUsersCardHTML(usersDATA), userList);
+  }
+
+
 
   //console.log(nameData);
   console.log(event.target);
@@ -65,4 +80,35 @@ function createUserCard(tableData) {
   </tr>
    
   `;
+}
+
+
+// console.log(1);
+// let timerId = setTimeout(() => {
+//   console.log(2);
+//   clearTimeout(timerId)
+// }, 2000);
+// console.log('timer id',timerId);
+// console.log(4);
+
+// let timerId = setInterval(() => {
+//   console.log('Fire!');
+// }, 1000);
+
+// setTimeout(() => {
+//   clearInterval(timerId)
+// }, 5000);
+
+
+workWithCallback(result => {
+  console.log(result);
+
+})
+
+function workWithCallback(cb) {
+  setTimeout(() => {
+    let data = Math.random()
+    cb(data)
+  }, 500);
+
 }
