@@ -8,11 +8,7 @@ usersDATA.sort((a, b) => {
 });
 console.log(usersDATA);
 
-<<<<<<< Updated upstream
-=======
-nameData.addEventListener("click", (event) => {
-  const tableKey = nameData.dataset.key;
->>>>>>> Stashed changes
+
 
 
 sortTable.addEventListener("click", (event) => {
